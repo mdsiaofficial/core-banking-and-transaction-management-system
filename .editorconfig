@@ -1,0 +1,53 @@
+# EditorConfig configuration for Core Banking & Transaction Management System
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{cs,csx}]
+indent_size = 4
+
+# C# Code Style Rules
+csharp_style_namespace_declarations = file_scoped:error
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
+csharp_style_prefer_method_group_conversion = true:suggestion
+csharp_style_prefer_top_level_statements = false:silent
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+
+# C# Formatting Rules
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_space_after_cast = false
+csharp_space_around_binary_operators = before_and_after
+
+# Analyzer Rules
+dotnet_diagnostic.CA1848.severity = none
+dotnet_diagnostic.CA1873.severity = none
+dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.CA1826.severity = none
+dotnet_diagnostic.CA1716.severity = none
+dotnet_diagnostic.CA1725.severity = none
+dotnet_diagnostic.CA1304.severity = none
+dotnet_diagnostic.CA1305.severity = none
+dotnet_diagnostic.CA1311.severity = none
+dotnet_diagnostic.CA1862.severity = none
+
+# Web / JSON / YAML / Markdown
+[*.{json,yml,yaml}]
+indent_size = 2
+
+[*.{ts,js,html,css,scss}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false

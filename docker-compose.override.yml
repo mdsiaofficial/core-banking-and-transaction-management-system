@@ -1,0 +1,21 @@
+# Local Development Compose Overrides
+services:
+  postgres:
+    ports:
+      - "5432:5432"
+
+  mailpit:
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
+  api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8080:8080"
+
+  web:
+    ports:
+      - "80:80"
+      - "4200:80"
