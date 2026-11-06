@@ -3,7 +3,6 @@ using Bank.Api.Filters;
 using Bank.Api.Middleware;
 using Bank.Api.Security;
 using Bank.Infrastructure;
-using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +22,7 @@ builder.Services.AddScoped<IdempotencyEndpointFilter>();
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ProblemDetailsExceptionHandler>();
 
-// OpenAPI & Scalar
+// OpenAPI & Swagger UI
 builder.Services.AddOpenApi();
 
 // CORS for Angular Web Client
@@ -55,7 +54,11 @@ app.UseAuthorization();
 if (app.Environment.IsDevelopment() || builder.Configuration.GetValue("ENABLE_OPENAPI", true))
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "Bank.Api v1");
+        options.RoutePrefix = "swagger";
+    });
 }
 
 // Map Endpoint Slices

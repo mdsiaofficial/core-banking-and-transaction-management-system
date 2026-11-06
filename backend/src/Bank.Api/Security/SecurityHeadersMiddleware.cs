@@ -14,19 +14,38 @@ public class SecurityHeadersMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
+        var path = context.Request.Path.Value ?? string.Empty;
+        var isApiDocs = path.StartsWith("/swagger", StringComparison.OrdinalIgnoreCase) ||
+                        path.StartsWith("/openapi", StringComparison.OrdinalIgnoreCase);
+
         var headers = context.Response.Headers;
 
-        // Content Security Policy
-        headers["Content-Security-Policy"] =
-            "default-src 'self'; " +
-            "script-src 'self'; " +
-            "style-src 'self' 'unsafe-inline'; " +
-            "img-src 'self' data:; " +
-            "font-src 'self'; " +
-            "object-src 'none'; " +
-            "base-uri 'self'; " +
-            "frame-ancestors 'none'; " +
-            "form-action 'self';";
+        // Content Security Policy (allow inline scripts/styles and fonts/eval needed by Swagger UI)
+        if (isApiDocs)
+        {
+            headers["Content-Security-Policy"] =
+                "default-src 'self'; " +
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
+                "style-src 'self' 'unsafe-inline'; " +
+                "img-src 'self' data: https:; " +
+                "font-src 'self' data:; " +
+                "connect-src 'self'; " +
+                "base-uri 'self'; " +
+                "frame-ancestors 'none';";
+        }
+        else
+        {
+            headers["Content-Security-Policy"] =
+                "default-src 'self'; " +
+                "script-src 'self'; " +
+                "style-src 'self' 'unsafe-inline'; " +
+                "img-src 'self' data:; " +
+                "font-src 'self'; " +
+                "object-src 'none'; " +
+                "base-uri 'self'; " +
+                "frame-ancestors 'none'; " +
+                "form-action 'self';";
+        }
 
         // HTTP Strict Transport Security
         headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains; preload";

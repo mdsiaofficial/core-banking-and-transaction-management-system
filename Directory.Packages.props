@@ -20,7 +20,7 @@
     <!-- Validation & API Documentation -->
     <PackageVersion Include="FluentValidation" Version="12.2.0" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.2.0" />
-    <PackageVersion Include="Scalar.AspNetCore" Version="2.19.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.3.1" />
 
     <!-- Logging & Observability -->
     <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />

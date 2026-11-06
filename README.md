@@ -94,8 +94,8 @@ When running the project via Docker Compose (`docker compose up`), the services 
 |---|:---:|:---:|---|---|
 | **Web Portal (Angular)** | `4200` & `80` | `80` | [http://localhost:4200](http://localhost:4200) | Customer & Admin Web Interface |
 | **Backend API** | `8080` | `8080` | [http://localhost:8080](http://localhost:8080) | ASP.NET Core Minimal API |
-| **Scalar API Docs** | `8080` | `8080` | [http://localhost:8080/scalar/v1](http://localhost:8080/scalar/v1) | Interactive modern API reference |
-| **OpenAPI Spec** | `8080` | `8080` | [http://localhost:8080/openapi/v1.json](http://localhost:8080/openapi/v1.json) | Raw OpenAPI v3 JSON document |
+| **Swagger UI** | `8080` & `4200` | `8080` | [http://localhost:8080/swagger](http://localhost:8080/swagger) | Interactive Swagger API documentation |
+| **OpenAPI Spec** | `8080` & `4200` | `8080` | [http://localhost:8080/openapi/v1.json](http://localhost:8080/openapi/v1.json) | Raw OpenAPI v3 JSON document |
 | **Mailpit Web UI** | `8025` | `8025` | [http://localhost:8025](http://localhost:8025) | Email catcher UI (view verification emails) |
 | **PostgreSQL 18** | `5432` | `5432` | `localhost:5432` | Database (`corebanking`, user: `bankuser`) |
 
@@ -103,21 +103,19 @@ When running the project via Docker Compose (`docker compose up`), the services 
 
 ---
 
-## 📖 API Documentation: OpenAPI vs. Swagger vs. Scalar
+## 📖 API Documentation: Swagger UI & OpenAPI Specification
 
-### 1. OpenAPI Specification (The Standard)
-* **What it is:** The vendor-neutral, machine-readable JSON/YAML standard describing REST endpoints, parameter schemas, request/response bodies, and authentication schemes.
+### 1. Swagger UI (Interactive API Explorer)
+* **What it is:** The official Swagger UI dashboard providing interactive endpoint documentation, schema inspection, and live request execution ("Try it out").
+* **Access URL:**
+  * Direct Backend: [http://localhost:8080/swagger](http://localhost:8080/swagger)
+  * Via Web Reverse Proxy: [http://localhost:4200/swagger](http://localhost:4200/swagger)
+* **Features:** Full visualization of endpoints, authentication headers, request payloads, and RFC 9457 Problem Details responses.
+
+### 2. OpenAPI Specification
+* **What it is:** The vendor-neutral, machine-readable standard describing all REST endpoints in JSON format.
 * In .NET 10, ASP.NET Core natively generates the specification via `builder.Services.AddOpenApi()` and `app.MapOpenApi()`.
-* **Path:** `http://localhost:8080/openapi/v1.json`
-
-### 2. Swagger UI (The Legacy Visualizer)
-* **What it is:** The traditional green-and-white web UI (`Swashbuckle.AspNetCore`) historically used to visualize OpenAPI specs.
-* **Status:** Swashbuckle maintenance has slowed down in modern .NET; Microsoft now natively integrates OpenAPI and recommends modern alternatives like Scalar.
-
-### 3. Scalar API Reference (The Modern Visualizer)
-* **What it is:** A fast, beautifully designed open-source documentation interface that consumes the OpenAPI spec.
-* **Features:** Built-in dark mode, interactive API testing ("Try it"), instant search, and automatic multi-language code snippets (cURL, C#, TypeScript, Python, etc.).
-* **Path:** `http://localhost:8080/scalar/v1`
+* **Path:** [http://localhost:8080/openapi/v1.json](http://localhost:8080/openapi/v1.json) (or [http://localhost:4200/openapi/v1.json](http://localhost:4200/openapi/v1.json))
 
 ---
 
